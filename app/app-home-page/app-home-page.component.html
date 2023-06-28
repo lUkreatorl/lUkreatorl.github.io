@@ -1,0 +1,23 @@
+<div [ngClass]="{'d-none': isLoaded, 'd-flex': !isLoaded, 
+'loader align-items-center justify-content-center': true}">
+  <div class="spinner-border text-info" style="width: 15rem; height: 15rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div [ngClass]="{'d-none': !isLoaded, 'd-block': isLoaded, 
+'home-page d-flex flex-column justify-content-between': true}">
+  <div class="d-flex flex-wrap justify-content-center">
+    <div class="card quizze-card m-2" *ngFor="let quizze of quizzes">
+      <div class="card-body">
+        <h5 class="card-title">{{ quizze.Name }}</h5>
+        <p class="card-text">Questions: {{ quizze.Questions.length }}</p>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-success">Play</button>
+        </div>  
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-warning rnd-quizze">I'm Lucky</button>
+</div>
