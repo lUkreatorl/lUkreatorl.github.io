@@ -1,10 +1,20 @@
-a
+$layout-breakpoint-small: 960px
+
+a, a.disabled
     text-decoration: none
     text-inline: none
     color: white
+    font-size: 1.2em
+
+.navbar
+    height: 7vh
 
 .nav-link:focus, .nav-link:hover, .nav-link.active
-    color: green
+    color: lightgreen
 
 .nav-link
     margin: 0 5rem
+
+@media (max-width: 680px)
+  .nav-link
+    margin: 0 1rem

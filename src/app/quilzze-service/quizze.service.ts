@@ -10,25 +10,34 @@ export class QuizzeService {
 
   private apiUrl = 'https://opentdb.com/api.php?amount=';
 
+  quizzes: Quizze [] = [];
   constructor(private http: HttpClient) { }
   
   getInitQuizzes(): Observable<Quizze[]> {
-    const quizzesObservables: Observable<Quizze>[] = [];
-
+    const observables: Observable<Quizze>[] = [];
     for (let index = 0; index < 10; index++) {
       const quizObservable = this.http.get<any>(this.apiUrl + this.getRnd(5, 20)).pipe(
         map((response: any) => {
           const quiz: Quizze = {
-            Name: 'Random quizze №' + (index + 1), // Set the name of the quiz based on the response or leave it empty
+            Name: 'Random quizze №' + (index + 1),
             Questions: response.results
           };
           return quiz;
         })
       );
-      quizzesObservables.push(quizObservable);
+      observables.push(quizObservable);
     }
 
-    return forkJoin(quizzesObservables);
+    return forkJoin(observables).pipe(
+      map((quizzes: Quizze[]) => {
+        this.quizzes = quizzes;
+        return quizzes;
+      })
+    );
+  }
+
+  getQuizById(quizId: number): Quizze {
+    return this.quizzes[quizId];
   }
 
   getRnd(min: number, max: number) : number {

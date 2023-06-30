@@ -7,7 +7,7 @@ import { AppPlayPageComponent } from './app-play-page/app-play-page.component';
 const routes: Routes = [
   { path: '', component: AppHomePageComponent },
   { path: 'home', component: AppHomePageComponent },
-  { path: 'play', component: AppPlayPageComponent }
+  { path: 'play/:id', component: AppPlayPageComponent }
 ];
 
 @NgModule({

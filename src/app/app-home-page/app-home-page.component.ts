@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QuizzeService } from '../quilzze-service/quizze.service';
 import { Quizze } from '../interfaces/quizze';
 
@@ -12,7 +13,7 @@ export class AppHomePageComponent implements OnInit {
   isLoaded: boolean = false;
   quizzes!: Quizze[];
 
-  constructor(private quizzeService: QuizzeService) {}
+  constructor(private quizzeService: QuizzeService, private router: Router) {}
 
   ngOnInit() {
     this.quizzeService.getInitQuizzes().subscribe((data) => {
@@ -20,5 +21,9 @@ export class AppHomePageComponent implements OnInit {
       this.quizzes = data;
       this.isLoaded = true;
     });
+  }
+
+  playQuizz(id: number){
+    this.router.navigate(['play', id]);
   }
 }

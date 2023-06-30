@@ -1,1 +1,25 @@
-<p>app-play-page works!</p>
+<div class="py-2 px-4 d-flex flex-column align-items-center ">
+    <h1 class="h1">{{quizze.Name}}</h1>
+    <h5>Questin count: {{quizze.Questions.length}}</h5>
+
+    <form>
+        <h6 class="text-align-center">Question: {{gameqstn.question}}</h6>
+        <div class="d-flex mt-3 justify-content-center question-block">
+            <div>
+                <div *ngFor="let answers of qstnResponse">
+                    <input class="me-1" type="radio" name="answer" value="answers" id="response">
+                    <label for="response" class="fs-6 fw-bolder">{{answers}}</label>
+                </div>
+            </div>
+        </div>
+    </form>
+        <div class="question-cnt fixed-bottom d-flex flex-column align-items-center pb-5">
+            <nav aria-label="">
+                <ul class="pagination pagination-sm flex-wrap justify-content-center">
+                  <li [class]="{'page-item' : true, 'active' : questionNumb == i }" *ngFor="let i = index; let question of quizze.Questions"><a class="page-link" (click)="changeQuestion(i)">{{i + 1}}</a></li>
+                </ul>
+              </nav>
+              <button class="btn btn-danger w-25">Close quizze</button>
+        </div>
+        
+</div>
