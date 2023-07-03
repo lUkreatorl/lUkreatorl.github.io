@@ -22,7 +22,7 @@ export class AppHomePageComponent implements OnInit {
       this.isLoaded = true;
     });
 
-    this.randomQuiz = Math.floor((Math.random() * 10))-1; 
+    this.randomQuiz = Math.floor((Math.random() * 9)); 
   }
 
   playQuizz(id: number){
