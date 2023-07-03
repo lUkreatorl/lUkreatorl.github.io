@@ -1,0 +1,9 @@
+<div class="p-3 d-flex flex-column align-items-center">
+    <h1>Quiz is finished!</h1>
+    <h6 class="mt-2">Your correct answers: {{ score }}</h6>
+    <h6>Time spent: {{ timeSpent }}</h6>
+    <h6>Question count: {{ count }}</h6>
+    <h6>Difficulty: {{ difficulty | number: '1.0-2' }}</h6>
+
+<button type="button" class="btn btn-success mt-4" (click)="goHome()">Go to home page</button>
+</div>

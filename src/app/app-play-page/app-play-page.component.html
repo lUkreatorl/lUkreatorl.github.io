@@ -4,22 +4,43 @@
 
     <form>
         <h6 class="text-align-center">Question: {{gameqstn.question}}</h6>
-        <div class="d-flex mt-3 justify-content-center question-block">
+        <div class="mt-3 d-flex flex-column justify-content-center align-items-center question-block">
             <div>
-                <div *ngFor="let answers of qstnResponse">
-                    <input class="me-1" type="radio" name="answer" value="answers" id="response">
-                    <label for="response" class="fs-6 fw-bolder">{{answers}}</label>
-                </div>
+              <div *ngFor="let answer of qstnResponse">
+                <input class="me-1 form-check-input" type="radio" name="answer" [value]="answer" [(ngModel)]="selectedAnswer">
+                <label class="fs-6 fw-bolder form-check-label">{{answer}}</label>
+              </div>
             </div>
-        </div>
+      
+            <button class="mt-5 btn btn-success" type="button" (click)="answerQuestion(questionNumb)">Answer</button>
+          </div>
     </form>
         <div class="question-cnt fixed-bottom d-flex flex-column align-items-center pb-5">
             <nav aria-label="">
                 <ul class="pagination pagination-sm flex-wrap justify-content-center">
-                  <li [class]="{'page-item' : true, 'active' : questionNumb == i }" *ngFor="let i = index; let question of quizze.Questions"><a class="page-link" (click)="changeQuestion(i)">{{i + 1}}</a></li>
+                  <li [class]="{'page-item': true, 'disabled': userAnswers.get(i) === 'correct' || userAnswers.get(i) === 'wrong'}" *ngFor="let i = index; let question of quizze.Questions">
+                    <a [class]="{'page-link' : true, 'correct': userAnswers.get(i) === 'correct', 'wrong': userAnswers.get(i) === 'wrong', 'current': questionNumb === i}" (click)="changeQuestion(i)">{{i + 1}}</a>
+                  </li>
                 </ul>
               </nav>
-              <button class="btn btn-danger w-25">Close quizze</button>
+              <button class="btn btn-danger w-25" type="button"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Close quizze</button>
         </div>
         
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Leave Quizze?</h1>
+                </div>
+                <div class="modal-body">
+                  If you leave quizze you lost your progress.
+                  Are you shure?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal">Stay</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="exitQuizze()">Leave</button>
+                </div>
+              </div>
+            </div>
+          </div>
 </div>
